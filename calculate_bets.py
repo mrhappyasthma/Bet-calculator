@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-def calculate_bets():
+def calculate_bets(event=None):
     try:
         # Get input values from the GUI
         total_bet = float(total_bet_entry.get())
@@ -57,13 +57,19 @@ p4_entry = ttk.Entry(root)
 p4_entry.grid(row=4, column=1, padx=5, pady=5)
 p4_entry.insert(0, "7.5")
 
-# Create a button to calculate bets
-calculate_button = ttk.Button(root, text="Calculate Bets", command=calculate_bets)
-calculate_button.grid(row=5, column=0, columnspan=2, pady=10)
+# Bind the calculate_bets function to the entry fields for real-time updates
+total_bet_entry.bind("<KeyRelease>", calculate_bets)
+p1_entry.bind("<KeyRelease>", calculate_bets)
+p2_entry.bind("<KeyRelease>", calculate_bets)
+p3_entry.bind("<KeyRelease>", calculate_bets)
+p4_entry.bind("<KeyRelease>", calculate_bets)
 
 # Create an output text box to display the results
 output_text = tk.Text(root, height=10, width=50)
 output_text.grid(row=6, column=0, columnspan=2, padx=5, pady=5)
+
+# Call calculate_bets once to populate the textbox on first run
+calculate_bets()
 
 # Run the Tkinter main loop
 root.mainloop()
